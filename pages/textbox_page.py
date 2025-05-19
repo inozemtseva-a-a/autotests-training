@@ -30,7 +30,7 @@ class TextBox:
     def getSubmitButton(self):
         return self.driver.find_element(By.XPATH, self.SUBMIT_BUTTON)
 
-    #I can add DDT here from file
+    #I can add DDT here from file. And it should be in test, not in the page
     def enterTextBoxes(self):
         self.getFullName().send_keys("Rndomsurname")
         self.getEmail().send_keys("email@yahoo.com")
