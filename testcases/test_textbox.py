@@ -3,6 +3,8 @@ import softest
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver import Keys
+from selenium.webdriver.support.wait import WebDriverWait
 
 #so I just firstly write a test and then refactor it to look good and be optimal
 
@@ -17,7 +19,7 @@ click "submit"
 #softest.TestCase
 """
 
-#@pytest.mark.usefixtures("setup")
+#@pytest.mark.usefixtures("setup") #I think I don't need fixture to get url because different pages need dif. urls
 class TestTextBoxPage():
     def text_box_imput(self):
         driver = webdriver.Chrome()
