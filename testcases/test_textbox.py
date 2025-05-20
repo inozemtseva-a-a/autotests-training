@@ -5,6 +5,11 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Keys
 from selenium.webdriver.support.wait import WebDriverWait
+from ddt import ddt,data,unpack,file_data
+#driver = None
+
+from pages.textbox_page import TextBox
+from testcases.conftest import driver
 
 #so I just firstly write a test and then refactor it to look good and be optimal
 
@@ -19,32 +24,25 @@ click "submit"
 #softest.TestCase
 """
 
-#@pytest.mark.usefixtures("setup") #I think I don't need fixture to get url because different pages need dif. urls
-class TestTextBoxPage():
-    def text_box_imput(self):
-        driver = webdriver.Chrome()
-        driver.get("https://www.tutorialspoint.com/selenium/practice/text-box.php") #I'll change the logic later
-        driver.maximize_window()
-        time.sleep(3) #it'll be removed also and I'll add waits
-        fullname = driver.find_element(By.XPATH, "//input[@id='fullname']")
-        fullname.send_keys("Rndomsurname")
-        time.sleep(1)
+@pytest.mark.usefixtures("setup") #I think I don't need fixture to get url because different pages need dif. urls
+@ddt
+class TestTextBoxPage(softest.TestCase):
+    #@pytest.fixture(autouse=True)
+    #global driver
+    #driver = webdriver.Chrome()
+    #driver.get("https://www.tutorialspoint.com/selenium/practice/text-box.php")
+    #driver.maximize_window()
 
-        email = driver.find_element(By.XPATH, "//input[@id='email']")
-        email.send_keys("email@yahoo.com")
-        time.sleep(1)
+    @pytest.fixture(autouse=True)
+    def class_setup(self):
+        self.tb = TextBox(self.driver)
 
-        address = driver.find_element(By.XPATH, "//textarea[@id='address']")
-        address.send_keys("21113 Bulevar Oslobozdenija 10 Novi Sad Serbia")
-        time.sleep(1)
-
-        address = driver.find_element(By.XPATH, "//input[@id='password']")
-        address.send_keys("Qwert1234")
-        time.sleep(1)
-
-        submitbutton = driver.find_element(By.XPATH, "//input[@value='Submit']")
-        submitbutton.click()
+    #DDT here
+    #@data(("Rndomsurname","email@yahoo.com", "21113 Bulevar Oslobozdenija 10 Novi Sad Serbia", "Qwert1234"),("123456","123456", "123456", "123456"))
+    #@unpack
+    def test_text_boxes_are_filled(self, surname="Alala", email="email@yahoo.com", address="21113 Bulevar Oslobozdenija 10 Novi Sad Serbia", pwd="Qwert1234"):
+        filling_result = self.tb.enter_text_boxes(surname, email, address, pwd)
         time.sleep(3)
+        print(filling_result)
 
-testing = TestTextBoxPage()
-testing.text_box_imput()
+
