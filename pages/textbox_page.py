@@ -39,4 +39,15 @@ class TextBox(BaseDriver):
         self.get_address().send_keys(address)
         self.get_password().send_keys(pwd)
         self.get_submit_button().click()
-        return "End"
+        #return "End"
+
+    # def checking_emptiness(self):
+    #     values_fullname = self.get_full_name().get_attribute("value")
+    #     if values_fullname == "":
+    #         print("empty")
+    #     else:
+    #         print("Not empty!")
+
+        # self.get_email().
+        # self.get_address().
+        # self.get_password().

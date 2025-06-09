@@ -25,5 +25,8 @@ class TestTextBoxPage(softest.TestCase):
         filling_result = self.tb.enter_text_boxes(surname, email, address, pwd)
         time.sleep(3)  #hardcoded for now
         print(filling_result)
+        # output_checking = self.checking_emptiness()
+        # print(output_checking)
+
 
 
