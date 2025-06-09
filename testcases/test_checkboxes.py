@@ -14,7 +14,10 @@ class TestCheckBoxPage(softest.TestCase):
 
     #test: when checking main 1 is doesn't check main 2
     def test_checkboxes(self):
+        self.chb.opening_page()
+        time.sleep(3)
         resulting = self.chb.get_checkbox_main_level_1()
+        time.sleep(3)
         resulting2 = self.chb.selecting_checkboxes_main_2()
         time.sleep(3)  #hardcoded for now
         print(resulting)
